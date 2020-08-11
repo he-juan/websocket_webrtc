@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WFU Basic peer connection demo</title>
+    <script type="text/javascript" src="src/debug.js"></script>
+    <script type="text/javascript" src="src/adapter.js"></script>
+    <script type="text/javascript" src="src/sdp_tools.js"></script>
+    <script type="text/javascript" src="src/webSocket.js"></script>
+    <script>
+        /******************************************************************************************************/
+        /** 日志 **/
+        /******************************************************************************************************/
+        /*Log Debug Start*/
+        if (localStorage.debug === undefined) {
+            localStorage.debug = "*:INFO,*:WARN,*:ERROR";
+        }
+
+        let log = {};
+        log.debug = window.debug("JSEP:DEBUG");
+        log.log = window.debug("JSEP:LOG");
+        log.info = window.debug("JSEP:INFO");
+        log.warn = window.debug("JSEP:WARN");
+        log.error = window.debug("JSEP:ERROR");
+        /*Log Debug End*/
+    </script>
+    <style>
+        .video-setting audio,video{
+            border: 1px solid #b95050;
+            width: 300px;
+            height: 225px;
+        }
+        input {
+            height: 40px;
+            background: brown;
+            color: aliceblue;
+            font-size: 15px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Local audio/video</h1>
+<div class="video-setting">
+    <table>
+        <thead>
+        <tr>
+            <th>localVideo1</th>
+            <th>localVideo2</th>
+            <th>localPresent</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><video id="localVideo1" playsinline autoplay></video></td>
+            <td><video id="localVideo2" playsinline autoplay></video></td>
+            <td><video id="localPresent" playsinline autoplay></video></td>
+            <td><audio id="localAudio" autoplay muted></audio></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<h1>Remote audio/video</h1>
+<div class="video-setting">
+    <table>
+        <thead>
+        <tr>
+            <th>remoteVideo1</th>
+            <th>remoteVideo2</th>
+            <th>remotePresent</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><video id="remoteVideo1" playsinline autoplay></video></td>
+            <td><video id="remoteVideo2" playsinline autoplay></video></td>
+            <td><video id="remotePresent" playsinline autoplay></video></td>
+            <td><audio id="remoteAudio" autoplay></audio></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<input type="button" value="getMedia" onclick="getPresentStream()">
+
+<input type="button" value="start basic peer connection" onclick="start()">
+
+<input type="button" value="hangup" style="background: #737373;" onclick="hangup()">
+
+<script type="text/javascript" src="src/peer.js"></script>
+<script type="text/javascript" src="src/common.js"></script>
+<script type="text/javascript" src="src/main.js"></script>
+</body>
+</html>
